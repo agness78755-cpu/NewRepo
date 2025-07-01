@@ -12,5 +12,7 @@ namespace CarRentalAPI.DTO
         [StringLength(50)]
         public string LicensePlate { get; set; }
         public decimal DailyRate { get; set; }
+
+        public string status { get; set; }
     }
 }

@@ -1,9 +1,10 @@
 ﻿using CarRentalAPI.Data;
 using CarRentalAPI.Models;
 using CarRentalAPI.Services.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.ComponentModel.DataAnnotations;
-using System.Data.Entity;
+
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;

@@ -1,19 +1,23 @@
-using CarRentalAPI.Services.Interfaces;
+﻿using CarRentalAPI.Data;
 using CarRentalAPI.Services;
-using CarRentalAPI.Data;
+using CarRentalAPI.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionStrings")));
 
 builder.Services.AddScoped<IAuthService, AuthService>();
+
+builder.Services.AddScoped<ICarService, CarService>();
+
+builder.Services.AddScoped<IRentalService, RentalService>();
+
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
@@ -60,7 +64,6 @@ app.UseExceptionHandler("/error");
 app.UseAuthentication();
 app.UseCors("AllowAllOrigins");
 builder.Services.AddAuthorization();
-app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
 app.Run();

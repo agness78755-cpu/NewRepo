@@ -26,12 +26,21 @@ namespace CarRentalAPI.Controllers
             return Ok(car);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> AddCar(CarDTO carDto)
-        {
-            var newCar = await _carService.AddCarAsync(carDto);
-            return CreatedAtAction(nameof(GetCar), new { id = newCar.CarID }, newCar);
-        }
+       [HttpPost]
+public async Task<IActionResult> AddCar(CarDTO carDto)
+{
+    try
+    {
+        var newCar = await _carService.AddCarAsync(carDto);
+        return CreatedAtAction(nameof(GetCar), new { id = newCar.CarID }, newCar);
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"AddCar failed: {ex.Message}");
+        return StatusCode(500, new { error = ex.Message });
+    }
+}
+
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCar(int id)

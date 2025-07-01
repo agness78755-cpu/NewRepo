@@ -1,8 +1,9 @@
-﻿using System.Data.Entity;
+﻿
 using CarRentalAPI.Data;
 using CarRentalAPI.DTO;
 using CarRentalAPI.Models;
 using CarRentalAPI.Services.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace CarRentalAPI.Services
 {
